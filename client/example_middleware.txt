@@ -1,0 +1,30 @@
+import { NextResponse, NextRequest } from "next/server";
+import { cookies } from "next/headers";
+// import { jwtVerify } from "jose";
+
+export async function middleware(req: NextRequest) {
+  try {
+    const token = cookies().has("token");
+    console.log(token);
+    // if (!token) {
+    //   return NextResponse.redirect("/");
+    // }
+
+    // const publicKey = await fetchPublicKey(); // Assuming you have a function to fetch the public key
+    // const verifiedToken = jwtVerify(token, publicKey);
+
+    // if (!verifiedToken) {
+    //   return NextResponse.redirect("/");
+    // }
+
+    // // Continue with the next middleware or route handler
+    // return NextResponse.next();
+  } catch (error) {
+    console.error("Error verifying token:", error);
+    return NextResponse.redirect("/");
+  }
+}
+
+export const config = {
+  matcher: ["/api/*"],
+};
